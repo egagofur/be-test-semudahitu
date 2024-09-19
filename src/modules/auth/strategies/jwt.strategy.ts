@@ -21,7 +21,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
   async validate(payload: IJwtPayload): Promise<User> {
     const { id } = payload;
-    const user = await this.userRepository.findById(id, ['roles', 'talent']);
+    const user = await this.userRepository.findById(id);
     if (!user) {
       throw new UnprocessableEntityException(`Phone or password is not valid!`);
     }
