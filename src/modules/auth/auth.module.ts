@@ -7,6 +7,8 @@ import { UserRepository } from './repositories/user.repository';
 import { PrismaService } from '../prisma/prisma.service';
 import { AuthRegisterService } from './services/auth-register.service';
 import { AuthRegisterController } from './controllers/v1/auth-register.controller';
+import { AuthLoginService } from './services/auth-login.service';
+import { AuthLoginController } from './controllers/v1/auth-login.controller';
 
 @Module({
   imports: [
@@ -29,14 +31,16 @@ import { AuthRegisterController } from './controllers/v1/auth-register.controlle
     // services
     PrismaService,
     AuthRegisterService,
+    AuthLoginService,
 
     // repositories
     UserRepository,
   ],
-  controllers: [AuthRegisterController],
+  controllers: [AuthRegisterController, AuthLoginController],
   exports: [
     // services
     AuthRegisterService,
+    AuthLoginService,
 
     // repositories
     UserRepository,
