@@ -8,6 +8,7 @@ import {
   Post,
   Put,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { EmployeeService } from '../services/employee.service';
 import { EmployeeResponse } from '../responses/employee.respon';
@@ -17,8 +18,10 @@ import {
   EmployeeUpdateRequest,
 } from '../requests/employee.request';
 import { IApiResponse } from 'src/common/interface/response.interface';
+import { LoggedInGuard } from 'src/modules/auth/guards/logged-in.guard';
 
 @Controller('employees')
+@UseGuards(LoggedInGuard)
 export class EmployeeController {
   constructor(private readonly employeeService: EmployeeService) {}
 
