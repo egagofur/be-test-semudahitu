@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnprocessableEntityException } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
 import { AuthRegisterRequest } from '../requests/auth-register.request';
 import { User } from '@prisma/client';
@@ -14,7 +14,7 @@ export class AuthRegisterService {
     });
 
     if (emailExists) {
-      throw new Error('Email already exists');
+      throw new UnprocessableEntityException('Email already exists');
     }
 
     return this.prisma.$transaction(async (prisma) => {

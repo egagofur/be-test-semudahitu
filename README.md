@@ -1,85 +1,194 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Employee Management System
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+This project is an Employee Management System built with NestJS and Prisma ORM. It provides a RESTful API for managing employee data.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Technologies Used
 
-## Description
+- [NestJS](https://nestjs.com/) - A progressive Node.js framework for building efficient and scalable server-side applications.
+- [Prisma](https://www.prisma.io/) - Next-generation ORM for Node.js and TypeScript.
+- [PostgreSQL](https://www.postgresql.org/) - Open source object-relational database system.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Prerequisites
 
-## Project setup
+Before you begin, ensure you have met the following requirements:
+
+- Node.js (v18 or later)
+- yarn (v1.22.22 or later)
+- PostgreSQL database
+
+## Setup and Installation
+
+1. Clone the repository:
 
 ```bash
-$ yarn install
+git clone https://github.com/egagofur/be-test-semudahitu.git
+cd be-test-semudahitu
 ```
 
-## Compile and run the project
+2. Install dependencies:
 
 ```bash
-# development
-$ yarn run start
-
-# watch mode
-$ yarn run start:dev
-
-# production mode
-$ yarn run start:prod
+yarn install
 ```
 
-## Run tests
+3. Set up your environment variables:
+
+- Copy the `.env.example` file to `.env`
+- Update the `DATABASE_URL` in the `.env` file with your PostgreSQL connection string
+
+4. Set up the database:
 
 ```bash
-# unit tests
-$ yarn run test
-
-# e2e tests
-$ yarn run test:e2e
-
-# test coverage
-$ yarn run test:cov
+npx prisma migrate dev
 ```
 
-## Resources
+5. Generate Prisma client:
 
-Check out a few resources that may come in handy when working with NestJS:
+```bash
+npx prisma generate
+```
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+6. Start the development server:
 
-## Support
+```bash
+yarn start:dev
+```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+7. Start the development server:
 
-## Stay in touch
+```bash
+The server should now be running on `http://localhost:3000`.
+```
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+## API Endpoints
 
-## License
+### Auth
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+- `POST /register`: To create new user login
+
+#### Request Body
+
+```bash
+{
+    "fullname": "ega gofur",
+    "companyName": "Semudahitu.com",
+    "mobilePhoneNumber": "08565501860",
+    "email": "egagofur@gmail.com",
+    "password": "Admin123!"
+}
+```
+
+- `POST /login`: To login with valid user
+
+```bash
+{
+    "email": "egagofur@gmail.com",
+    "password": "Admin123!"
+}
+```
+
+### Employee
+
+- `GET /employees`: Fetch all employees (with pagination)
+
+```bash
+{
+    "meta": {
+        "page": 1,
+        "perPage": 10,
+        "total": 1,
+        "totalPage": 1
+    },
+    "data": [
+        {
+            "address": "123 Main St, City, Country",
+            "barcode": "EMP001BAR",
+            "birthdate": "1990-01-15T00:00:00.000Z",
+            "branch": "Main Branch",
+            "email": "john.doe@example.com",
+            "fullname": "John update Doe",
+            "gender": "Male",
+            "id": "cm1ainxok00022ie42cz8t1uq",
+            "maritalStatus": "Single"
+        }
+    ]
+}
+```
+
+- `POST /employees`: Create a new employee
+
+```bash
+{
+  "approvalLine": "Manager",
+  "birthdate": "1990-01-15T00:00:00.000Z",
+  "branch": "Main Branch",
+  "class": "Class A",
+  "department": "IT Department",
+  "email": "egagofur@gmail.com",
+  "employeeId": "EMP002",
+  "employmentStatus": "Full-time",
+  "firstName": "Ega Gofur",
+  "gender": "Male",
+  "grade": "Senior",
+  "groupStructure": "Technology",
+  "jobLevel": "Level 3",
+  "jobPosition": "Software Engineer",
+  "joinDate": "2023-01-01T00:00:00.000Z",
+  "lastName": "Update",
+  "mobilePhone": "+085655501860",
+  "nik": "3507320906050002",
+  "sbu": "Technology Solutions",
+  "schedule": "9 AM - 5 PM",
+  "barcode": "EMP001BAR",
+  "bloodType": "A+",
+  "citizenIdAddress": "123 Main St, City, Country",
+  "manager": "Jane Smith",
+  "maritalStatus": "Single",
+  "phone": "+1987654321",
+  "passportExpiry": "2030-12-31T00:00:00.000Z",
+  "passportNumber": "AB1234561",
+  "placeOfBirth": "New York",
+  "postalCode": "12345",
+  "religion": "Prefer not to say",
+  "residentialAddress": "456 Oak St, City, Country"
+}
+```
+
+- `PUT /employees/:id`: Update an existing employee
+``` bash
+{
+  "approvalLine": "Manager",
+  "birthdate": "1990-01-15T00:00:00.000Z",
+  "branch": "Main Branch",
+  "class": "Class A",
+  "department": "IT Department",
+  "email": "egagofur@gmail.com",
+  "employeeId": "EMP002",
+  "employmentStatus": "Full-time",
+  "firstName": "Ega Gofur Updated",
+  "gender": "Male",
+  "grade": "Senior",
+  "groupStructure": "Technology",
+  "jobLevel": "Level 3",
+  "jobPosition": "Software Engineer",
+  "joinDate": "2023-01-01T00:00:00.000Z",
+  "lastName": "Update",
+  "mobilePhone": "+1234567890",
+  "nik": "3507320906050002",
+  "sbu": "Technology Solutions",
+  "schedule": "9 AM - 5 PM",
+  "barcode": "EMP001BAR",
+  "bloodType": "A+",
+  "citizenIdAddress": "123 Main St, City, Country",
+  "manager": "Jane Smith",
+  "maritalStatus": "Single",
+  "phone": "+1987654321",
+  "passportExpiry": "2030-12-31T00:00:00.000Z",
+  "passportNumber": "AB1234561",
+  "placeOfBirth": "New York",
+  "postalCode": "12345",
+  "religion": "Prefer not to say",
+  "residentialAddress": "456 Oak St, City, Country"
+}
+```
+- `DELETE /employees/:id`: Delete an employee
