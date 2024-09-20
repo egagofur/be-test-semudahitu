@@ -51,20 +51,10 @@ export class UserRepository {
     });
   }
 
-  async findById(id: string, relations?: string[]): Promise<User> {
-    const user = await this.prisma.user.findUnique({
+  async findById(id: string): Promise<User | null> {
+    return await this.prisma.user.findUnique({
       where: { id },
-      include: relations?.reduce((acc, relation) => {
-        acc[relation] = true;
-        return acc;
-      }, {}),
     });
-
-    if (!user) {
-      throw new UnprocessableEntityException('User not found');
-    }
-
-    return user;
   }
 
   async findByEmail(email: string): Promise<User | null> {
@@ -136,16 +126,5 @@ export class UserRepository {
     }
 
     return !user;
-  }
-
-  async updateWithTransaction(id: string, data: User): Promise<User> {
-    return await this.prisma.$transaction(async (prisma) => {
-      await prisma.user.update({
-        where: { id },
-        data,
-      });
-
-      return await this.findById(id);
-    });
   }
 }
