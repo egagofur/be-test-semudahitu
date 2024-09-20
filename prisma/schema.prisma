@@ -14,38 +14,56 @@ datasource db {
 }
 
 model User {
-    // mandatory fields
     id                String @id @default(cuid())
     fullname          String
     companyName       String
     email             String @unique
     mobilePhoneNumber String @unique
     password          String
-
-    homePhoneNumber String?   @unique
-    birthPlace      String?
-    birthDate       DateTime?
-    gender          String?
-    maritalStatus   String?
-    bloodType       String?
-    religion        String?
-
-    nationalIdNumber   String?
-    passportNumber     String?
-    passportExpiryDate DateTime?
-    postalCode         String?
-    citizenIdAddress   String?
-    usesResidence      Boolean?
-    residenceAddress   String?
-    Employee           Employee?
 }
 
 model Employee {
-    id             String @id @default(cuid())
-    user           User   @relation(fields: [userId], references: [id])
-    userId         String @unique
-    barcode        String
-    groupStructure String
-    grade          String
-    class          String
+    id            String   @id @default(cuid())
+    firstName     String
+    lastName      String
+    email         String   @unique
+    mobilePhone   String
+    phone         String?
+    placeOfBirth  String?
+    birthdate     DateTime
+    gender        Gender
+    maritalStatus String?
+    bloodType     String?
+    religion      String?
+
+    nik                String    @unique
+    passportNumber     String?   @unique
+    passportExpiry     DateTime?
+    postalCode         String?
+    citizenIdAddress   String?
+    residentialAddress String?
+
+    employeeId       String   @unique
+    barcode          String?
+    groupStructure   String
+    employmentStatus String
+    joinDate         DateTime
+    branch           String
+    department       String
+    jobPosition      String
+    jobLevel         String
+    grade            String
+    class            String
+    schedule         String
+    approvalLine     String
+    manager          String?
+    sbu              String
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+enum Gender {
+    Male
+    Female
 }

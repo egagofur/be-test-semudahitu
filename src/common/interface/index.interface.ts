@@ -1,6 +1,6 @@
-enum OrderDirectionType {
-  Asc = 'ASC',
-  Desc = 'DESC',
+export enum OrderDirectionType {
+  Asc = 'asc',
+  Desc = 'desc',
 }
 
 export interface ISortRequest {
