@@ -155,7 +155,8 @@ The server should now be running on `http://localhost:3000`.
 ```
 
 - `PUT /employees/:id`: Update an existing employee
-``` bash
+
+```bash
 {
   "approvalLine": "Manager",
   "birthdate": "1990-01-15T00:00:00.000Z",
@@ -191,4 +192,5 @@ The server should now be running on `http://localhost:3000`.
   "residentialAddress": "456 Oak St, City, Country"
 }
 ```
+
 - `DELETE /employees/:id`: Delete an employee
