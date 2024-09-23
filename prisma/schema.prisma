@@ -18,7 +18,7 @@ model User {
     fullname          String
     companyName       String
     email             String @unique
-    mobilePhoneNumber String @unique
+    mobilePhoneNumber String
     password          String
 }
 
