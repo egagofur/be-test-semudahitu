@@ -10,6 +10,7 @@ import {
   EmployeeUpdateRequest,
 } from '../requests/employee.request';
 import { OrderDirectionType } from '../../../common/interface/index.interface';
+import { Employee } from '@prisma/client';
 
 @Injectable()
 export class EmployeeService {
@@ -47,6 +48,18 @@ export class EmployeeService {
       meta,
       data,
     };
+  }
+
+  async findById(id: string): Promise<Employee> {
+    const employee = await this.prismaService.employee.findUnique({
+      where: { id },
+    });
+
+    if (!employee) {
+      return null;
+    }
+
+    return employee;
   }
 
   async create(data: EmployeeCreateRequest): Promise<EmployeeResponse> {

@@ -11,13 +11,8 @@ const baseEmployeeSchema = z.object({
   firstName: z.string().min(1, 'First name is required'),
   lastName: z.string().min(1, 'Last name is required'),
   email: z.string().email('Invalid email address'),
-  mobilePhone: z
-    .string()
-    .regex(/^\+?[1-9]\d{1,14}$/, 'Invalid mobile phone number'),
-  phone: z
-    .string()
-    .regex(/^\+?[1-9]\d{1,14}$/, 'Invalid phone number')
-    .optional(),
+  mobilePhone: z.string(),
+  phone: z.string().optional(),
   placeOfBirth: z.string().optional(),
   birthdate: dateStringSchema(),
   gender: z.enum(['Male', 'Female']),

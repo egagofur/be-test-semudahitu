@@ -19,6 +19,7 @@ import {
 } from '../requests/employee.request';
 import { IApiResponse } from 'src/common/interface/response.interface';
 import { LoggedInGuard } from 'src/modules/auth/guards/logged-in.guard';
+import { Employee } from '@prisma/client';
 
 @Controller('employees')
 @UseGuards(LoggedInGuard)
@@ -34,6 +35,22 @@ export class EmployeeController {
     const itemsPerPage = perPage ? parseInt(perPage, 10) : 10;
 
     return this.employeeService.findAll(pageNumber, itemsPerPage);
+  }
+
+  @Get(':id')
+  async findOne(@Param('id') id: string): Promise<IApiResponse<Employee>> {
+    try {
+      const data = await this.employeeService.findById(id);
+      return {
+        message: `Employee with ID ${id} has been found`,
+        data: data,
+      };
+    } catch (error) {
+      if (error.code === 'P2025') {
+        throw new NotFoundException(`Employee with ID ${id} not found`);
+      }
+      throw error;
+    }
   }
 
   @Post()
