@@ -194,3 +194,9 @@ The server should now be running on `http://localhost:3000`.
 ```
 
 - `DELETE /employees/:id`: Delete an employee
+
+## Demo vidio
+
+### https://www.loom.com/share/5c5396a596704bc9885159b7dcdefc86
+
+### https://www.loom.com/share/600216b9433d437d818535968a7a8c04
