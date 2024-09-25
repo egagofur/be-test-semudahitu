@@ -30,11 +30,12 @@ export class EmployeeController {
   async findAll(
     @Query('page') page?: string,
     @Query('perPage') perPage?: string,
+    @Query('search') search?: string,
   ): Promise<IPaginateResponse<EmployeeResponse>> {
     const pageNumber = page ? parseInt(page, 10) : 1;
     const itemsPerPage = perPage ? parseInt(perPage, 10) : 10;
 
-    return this.employeeService.findAll(pageNumber, itemsPerPage);
+    return this.employeeService.findAll(pageNumber, itemsPerPage, search);
   }
 
   @Get(':id')

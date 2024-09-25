@@ -10,7 +10,7 @@ import {
   EmployeeUpdateRequest,
 } from '../requests/employee.request';
 import { OrderDirectionType } from '../../../common/interface/index.interface';
-import { Employee } from '@prisma/client';
+import { Employee, Prisma } from '@prisma/client';
 
 @Injectable()
 export class EmployeeService {
@@ -19,12 +19,24 @@ export class EmployeeService {
   async findAll(
     page: number = 1,
     perPage: number = 10,
+    search?: string,
   ): Promise<IPaginateResponse<EmployeeResponse>> {
     const skip = (page - 1) * perPage;
 
+    const whereClause: Prisma.EmployeeWhereInput = search
+      ? {
+          OR: [
+            { firstName: { contains: search, mode: 'insensitive' } },
+            { lastName: { contains: search, mode: 'insensitive' } },
+            { email: { contains: search, mode: 'insensitive' } },
+          ],
+        }
+      : {};
+
     const [total, employees] = await Promise.all([
-      this.prismaService.employee.count(),
+      this.prismaService.employee.count({ where: whereClause }),
       this.prismaService.employee.findMany({
+        where: whereClause,
         skip,
         take: perPage,
         orderBy: {
